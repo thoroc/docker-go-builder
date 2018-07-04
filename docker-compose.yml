@@ -10,6 +10,7 @@ services:
     command: sh ./opt/build.sh
     environment:
       - PROJECT_PATH=github.com/thoroc/docker-go-builder
+      - CGO_ENABLED=0
       - BINARY=test
       - GOOS=linux
       - GOARCH=amd64
