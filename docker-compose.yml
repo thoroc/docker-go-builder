@@ -1,0 +1,15 @@
+version: "2"
+
+services:
+  docker-go-builder:
+    image: golang:1.10
+    container_name: docker-go-builder
+    volumes:
+      - .:/go/src/github.com/thoroc/docker-go-builder
+    working_dir: /go/src/github.com/thoroc/docker-go-builder
+    command: sh ./opt/build.sh
+    environment:
+      - PROJECT_PATH=github.com/thoroc/docker-go-builder
+      - BINARY=test
+      - GOOS=linux
+      - GOARCH=amd64
