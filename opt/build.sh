@@ -2,7 +2,7 @@
 
 export VERSION=$(git tag)
 export BUILD=$(git rev-parse HEAD)
-export LDFLAGS="-X main.Version=${VERSION} -X main.Build=${BUILD}"
+export LDFLAGS="-X main.Version=$VERSION -X main.Build=$BUILD"
 
 echo "> Environment Variables"
 echo "CGO_ENABLED=$CGO_ENABLED"
@@ -22,10 +22,14 @@ echo "LDFLAGS=$LDFLAGS"
 echo "> Getting dependencies"
 go get ./src
 
-#    -ldflags $LDFLAGS \
 echo "> Building project"
+#CGO_ENABLED=$CGO_ENABLED GOOS=$GOOS GOARCH=$GOARCH go build \
+#    -ldflags $LDFLAGS \
+#    -o ./bin/$BINARY \
+#    -v ./src
+
 CGO_ENABLED=$CGO_ENABLED GOOS=$GOOS GOARCH=$GOARCH go build \
-    -ldflags "-X main.version=$VERSION" \
+    -ldflags "-X main.Version=$VERSION -X main.Build=$BUILD" \
     -o ./bin/$BINARY \
     -v ./src
 

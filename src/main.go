@@ -8,11 +8,18 @@ import (
 	"os"
 )
 
+var Version string
+var Build string
+
 func indexHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	fmt.Fprintf(w, "This is the RESTful api")
 }
 
 func main() {
+	fmt.Printf("version %s\n", Version)
+	fmt.Printf("build %s\n", Build)
+
+
 	router := httprouter.New()
 	router.GET("/", indexHandler)
 
